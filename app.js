@@ -2,9 +2,9 @@ const http = require('http')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
-const expressHbs = require('express-handlebars')
+// const expressHbs = require('express-handlebars')
 
-const { routes: adminRoutes, products } = require('./routes/admin')
+const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const rootDir = require('./utils/path')
 
