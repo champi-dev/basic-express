@@ -20,7 +20,7 @@ app.use('/add-product', (req, res, next) => {
   `)
 })
 
-app.use('/product', (req, res) => {
+app.post('/product', (req, res) => {
   console.log(req.body)
   res.redirect('/')
 })
