@@ -12,21 +12,23 @@ class Product {
   save() {
     fs.readFile(filePath, (err, fileContent) => {
       let products = []
+
       if (!err) {
         products = JSON.parse(fileContent)
       }
+
       products.push(this)
-      fs.writeFile(filePath, JSON.stringify(products), (e) => console.log(e))
+      fs.writeFile(filePath, JSON.stringify(products), (e) => {
+        if (e) console.log(e)
+      })
     })
   }
 
-  static async fetchAll() {
-    const products = await fs.readFile(filePath, (err, fileContent) => {
-      if (err) return []
-      return JSON.parse(fileContent)
+  static fetchAll(cb) {
+    fs.readFile(filePath, (err, fileContent) => {
+      if (err) return cb([])
+      cb(JSON.parse(fileContent))
     })
-
-    return products
   }
 }
 
