@@ -9,6 +9,7 @@ const rootDir = require('./utils/path')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(path.join(rootDir, 'public')))
 app.use(adminRoutes)
 app.use(shopRoutes)
 app.use((req, res, next) => {
