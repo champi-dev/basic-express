@@ -11,7 +11,8 @@ const rootDir = require('./utils/path')
 const app = express()
 
 // app.engine('hbs', expressHbs())
-app.set('view engine', 'ejs')
+// app.set('view engine', 'ejs')
+app.set('view engine', 'pug')
 app.set('views', 'views')
 
 app.use(bodyParser.urlencoded({ extended: false }))
