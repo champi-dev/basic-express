@@ -22,8 +22,9 @@ const getProducts = (req, res, next) => {
 
 const getProduct = (req, res, next) => {
   const { productId } = req.params
-  console.log(Product.findById(productId, pr => console.log(pr)))
-  res.redirect('/')
+  Product.findById(productId, product => {
+    res.render('shop/product-detail', { product, pageTitle: product.title, path: '/products' })
+  })
 }
 
 const getCart = (req, res, next) => {
