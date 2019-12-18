@@ -18,6 +18,7 @@ block content
               h2.product__price $#{product.price}
               p.product__description #{product.description}
             .card__actions
+              a.btn(href="/products/" + product.id) Details
               form(action="/add-to-cart" method="POST")
                 button.btn(type="submit") Add to Cart
     else

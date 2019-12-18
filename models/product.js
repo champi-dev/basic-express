@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const uuidv1 = require('uuid/v1')
 
 const dirName = require('../utils/path')
 const filePath = path.join(dirName, 'data', 'products.json')
@@ -13,6 +14,7 @@ class Product {
   }
 
   save() {
+    this.id = uuidv1()
     fs.readFile(filePath, (err, fileContent) => {
       let products = []
 
