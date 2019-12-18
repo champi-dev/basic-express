@@ -12,5 +12,4 @@ block content
       img(src=product.imageUrl, alt=product.title)
     h2 #{product.price}
     p #{product.description}
-    form(action="/cart", method="POST")
-      button.btn(type="submit") Add to Cart
+    include ../includes/add-cart

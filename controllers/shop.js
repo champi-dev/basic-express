@@ -34,6 +34,12 @@ const getCart = (req, res, next) => {
   })
 }
 
+const postCart = (req, res, next) => {
+  const { productId } = req.body
+  console.log(productId)
+  res.redirect('/')
+}
+
 const getOrders = (req, res, next) => {
   res.render('shop/orders', {
     pageTitle: 'Your Orders',
@@ -53,6 +59,7 @@ module.exports = {
   getProducts,
   getProduct,
   getCart,
+  postCart,
   getOrders,
   getCheckout
 }

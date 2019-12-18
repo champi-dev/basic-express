@@ -18,6 +18,6 @@ block content
               h2.product__price $#{product.price}
               p.product__description #{product.description}
             .card__actions
-              button.btn Add to Cart
+              include ../includes/add-cart
     else
       h1 No Products
