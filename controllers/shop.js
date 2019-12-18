@@ -20,6 +20,12 @@ const getProducts = (req, res, next) => {
   })
 }
 
+const getProduct = (req, res, next) => {
+  const { productId } = req.params
+  console.log(productId)
+  res.redirect('/')
+}
+
 const getCart = (req, res, next) => {
   res.render('shop/cart', {
     pageTitle: 'Your Cart',
@@ -44,6 +50,7 @@ const getCheckout = (req, res, next) => {
 module.exports = {
   getIndex,
   getProducts,
+  getProduct,
   getCart,
   getOrders,
   getCheckout
