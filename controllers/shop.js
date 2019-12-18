@@ -1,7 +1,7 @@
 const Product = require('../models/product')
 
 const getIndex = (req, res, next) => {
-  Product.fetchAll(products => {
+  Product.fetchAll((products = []) => {
     res.render('shop/index', {
       prods: products,
       pageTitle: 'Shop',
@@ -22,7 +22,7 @@ const getProducts = (req, res, next) => {
 
 const getProduct = (req, res, next) => {
   const { productId } = req.params
-  console.log(productId)
+  console.log(Product.findById(productId, pr => console.log(pr)))
   res.redirect('/')
 }
 
