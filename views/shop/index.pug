@@ -13,10 +13,10 @@ block content
             header.card__header
               h1.product__title #{product.title}
             div.card__image
-              img(src="https://freeiconshop.com/wp-content/uploads/edd/book-flat.png", alt="A Book")
+              img(src=product.imageUrl, alt=product.title)
             div.card__content
-              h2.product__price $19.99
-              p.product__description A very interesting book about so many even more interesting things!
+              h2.product__price $#{product.price}
+              p.product__description #{product.description}
             .card__actions
               button.btn Add to Cart
     else
