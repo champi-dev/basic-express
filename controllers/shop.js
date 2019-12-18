@@ -27,6 +27,13 @@ const getCart = (req, res, next) => {
   })
 }
 
+const getOrders = (req, res, next) => {
+  res.render('shop/orders', {
+    pageTitle: 'Your Orders',
+    path: '/orders'
+  })
+}
+
 const getCheckout = (req, res, next) => {
   res.render('shop/checkout', {
     pageTitle: 'Checkout',
@@ -38,5 +45,6 @@ module.exports = {
   getIndex,
   getProducts,
   getCart,
+  getOrders,
   getCheckout
 }
