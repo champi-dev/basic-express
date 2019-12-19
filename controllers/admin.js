@@ -45,10 +45,6 @@ const postEditProduct = (req, res) => {
   res.redirect('/admin/products')
 }
 
-const postDeleteProduct = () => {
-  // const { productId } = req.body
-}
-
 const getProducts = (req, res) => {
   Product.fetchAll(products => {
     res.render('admin/products', {
@@ -57,6 +53,12 @@ const getProducts = (req, res) => {
       path: '/admin/products'
     })
   })
+}
+
+const postDeleteProduct = (req, res) => {
+  const { productId } = req.body
+  Product.deleteById(productId)
+  res.redirect('/admin/products')
 }
 
 module.exports = {

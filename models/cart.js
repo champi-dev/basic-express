@@ -12,7 +12,10 @@ class Cart {
     fs.readFile(p, (err, fileContent) => {
       let cart = { products: [], totalPrice: 0.0 }
       if (!err) {
-        cart = JSON.parse(fileContent)
+        const file = JSON.parse(fileContent)
+        if (Object.keys(file).length) {
+          cart = file
+        }
       }
 
       const existingProductIndex = cart.products.findIndex(prod => prod.id == id)
@@ -31,6 +34,22 @@ class Cart {
 
       cart.totalPrice += parseFloat(productPrice)
       fs.writeFile(p, JSON.stringify(cart), (err) => {
+        if (err) console.log(err)
+      })
+    })
+  }
+
+  static deleteProduct(id, productPrice) {
+    fs.readFile(p, (err, cart) => {
+      if (err) return console.log(err)
+      const updatedCart = { ...JSON.parse(cart) }
+
+      const product = updatedCart.products.find(prod => prod.id === id)
+      const { qty } = product
+      updatedCart.products = updatedCart.products.filter(prod => prod.id !== id)
+      updatedCart.totalPrice -= (productPrice * qty)
+
+      fs.writeFile(p, JSON.stringify(updatedCart), err => {
         if (err) console.log(err)
       })
     })
