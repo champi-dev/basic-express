@@ -19,5 +19,7 @@ block content
     .form-control
       label(for="description") Description
       textarea(name="description", rows="5")#description #{product ? product.description : ''}
+      if editing
+        input(type="hidden" name="productId" value=product.id)
     button.btn(type="submit") #{editing ? 'Edit' : 'Add'} Product
 

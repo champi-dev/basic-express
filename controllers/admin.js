@@ -10,7 +10,7 @@ const getAddProduct = (req, res, next) => {
 
 const postAddProduct = (req, res) => {
   const { title, imageUrl, description, price } = req.body
-  const product = new Product(title, imageUrl, description, price)
+  const product = new Product(null, title, imageUrl, description, price)
   product.save()
   res.redirect('/')
 }
@@ -31,6 +31,20 @@ const getEditProduct = (req, res, next) => {
   })
 }
 
+const postEditProduct = (req, res, next) => {
+  const { productId, title, imageUrl, price, description } = req.body
+  const product = new Product(
+    productId,
+    title,
+    imageUrl,
+    description,
+    price
+  )
+
+  product.save()
+  res.redirect('/admin/products')
+}
+
 const getProducts = (req, res) => {
   Product.fetchAll(products => {
     res.render('admin/products', {
@@ -45,5 +59,6 @@ module.exports = {
   getAddProduct,
   postAddProduct,
   getEditProduct,
+  postEditProduct,
   getProducts
 }
