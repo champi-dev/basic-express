@@ -1,6 +1,6 @@
 const Product = require('../models/product')
 
-const getAddProduct = (req, res, next) => {
+const getAddProduct = (req, res) => {
   res.render('admin/form-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
@@ -15,7 +15,7 @@ const postAddProduct = (req, res) => {
   res.redirect('/')
 }
 
-const getEditProduct = (req, res, next) => {
+const getEditProduct = (req, res) => {
   const editingMode = req.query.edit === 'true' ? true : false
   if (!editingMode) return res.redirect('/')
 
@@ -31,7 +31,7 @@ const getEditProduct = (req, res, next) => {
   })
 }
 
-const postEditProduct = (req, res, next) => {
+const postEditProduct = (req, res) => {
   const { productId, title, imageUrl, price, description } = req.body
   const product = new Product(
     productId,
