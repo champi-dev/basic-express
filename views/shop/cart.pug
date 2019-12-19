@@ -1,1 +1,10 @@
 extends ../layout/main-layout
+
+block content
+  main 
+    if products.length
+      ul
+        for p in products
+          li #{p.productData.title} (#{p.qty})
+    else
+      h1 No products in cart
