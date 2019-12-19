@@ -16,7 +16,7 @@ const postAddProduct = (req, res) => {
 }
 
 const getEditProduct = (req, res) => {
-  const editingMode = req.query.edit === 'true' ? true : false
+  const editingMode = req.query.edit === 'true'
   if (!editingMode) return res.redirect('/')
 
   const { productId } = req.params

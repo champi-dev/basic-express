@@ -8,7 +8,7 @@ const p = path.join(
 )
 
 class Cart {
-  static addProduct(id, productPrice) {
+  static addProduct (id, productPrice) {
     fs.readFile(p, (err, fileContent) => {
       let cart = { products: [], totalPrice: 0.0 }
       if (!err) {
@@ -18,7 +18,7 @@ class Cart {
         }
       }
 
-      const existingProductIndex = cart.products.findIndex(prod => prod.id == id)
+      const existingProductIndex = cart.products.findIndex(prod => prod.id === id)
       const existingProduct = cart.products[existingProductIndex]
       let updatedProduct
 
@@ -39,7 +39,7 @@ class Cart {
     })
   }
 
-  static deleteProduct(id, productPrice) {
+  static deleteProduct (id, productPrice) {
     fs.readFile(p, (err, cart) => {
       if (err) return console.log(err)
       const updatedCart = { ...JSON.parse(cart) }
@@ -55,7 +55,7 @@ class Cart {
     })
   }
 
-  static getCart(cb) {
+  static getCart (cb) {
     fs.readFile(p, (err, fileContent) => {
       if (err) return cb(null)
       const cart = JSON.parse(fileContent)
