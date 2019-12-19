@@ -5,6 +5,10 @@ block content
     if products.length
       ul
         for p in products
-          li #{p.productData.title} (#{p.qty})
+          li 
+            p #{p.productData.title} (#{p.qty})
+            form(action="/cart-delete-item" method="POST")
+              input(type="hidden" name="productId" value=p.productData.id)
+              button.btn(type="submit") Delete
     else
       h1 No products in cart

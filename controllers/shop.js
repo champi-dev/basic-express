@@ -57,6 +57,15 @@ const postCart = (req, res) => {
   res.redirect('/cart')
 }
 
+const postCartDeleteProduct = (req, res) => {
+  const { productId } = req.body
+  Product.findById(productId, (product) => {
+    console.log('**product**', product)
+    Cart.deleteProduct(productId, product.price)
+  })
+  res.redirect('/cart')
+}
+
 const getOrders = (req, res) => {
   res.render('shop/orders', {
     pageTitle: 'Your Orders',
@@ -77,6 +86,7 @@ module.exports = {
   getProduct,
   getCart,
   postCart,
+  postCartDeleteProduct,
   getOrders,
   getCheckout
 }
