@@ -45,6 +45,8 @@ class Cart {
       const updatedCart = { ...JSON.parse(cart) }
 
       const product = updatedCart.products.find(prod => prod.id === id)
+      if (!product) return
+
       const { qty } = product
       updatedCart.products = updatedCart.products.filter(prod => prod.id !== id)
       updatedCart.totalPrice -= (productPrice * qty)
