@@ -1,7 +1,10 @@
 const Product = require('../models/product')
 
 const getAddProduct = (req, res, next) => {
-  res.render('admin/add-product', { pageTitle: 'Add Product', path: '/admin/add-product' })
+  res.render('admin/form-product', {
+    pageTitle: 'Add Product',
+    path: '/admin/add-product'
+  })
 }
 
 const postAddProduct = (req, res) => {
@@ -9,6 +12,17 @@ const postAddProduct = (req, res) => {
   const product = new Product(title, imageUrl, description, price)
   product.save()
   res.redirect('/')
+}
+
+const getEditProduct = (req, res, next) => {
+  const editingMode = req.query.edit === 'true' ? true : false
+  if (!editingMode) return res.redirect('/')
+
+  res.render('admin/form-product', {
+    pageTitle: 'Edit Product',
+    path: '/admin/edit-product',
+    editing: editingMode
+  })
 }
 
 const getProducts = (req, res) => {
@@ -24,5 +38,6 @@ const getProducts = (req, res) => {
 module.exports = {
   getAddProduct,
   postAddProduct,
+  getEditProduct,
   getProducts
 }
