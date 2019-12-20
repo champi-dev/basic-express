@@ -14,13 +14,15 @@ const getIndex = (req, res) => {
 }
 
 const getProducts = (req, res) => {
-  Product.fetchAll(products => {
-    res.render('shop/product-list', {
-      prods: products,
-      pageTitle: 'All Products',
-      path: '/products'
+  Product.fetchAll()
+    .then(([rows, fieldData]) => {
+      res.render('shop/product-list', {
+        prods: rows,
+        pageTitle: 'All Products',
+        path: '/products'
+      })
     })
-  })
+    .catch(e => console.log(e))
 }
 
 const getProduct = (req, res) => {
