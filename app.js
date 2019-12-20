@@ -3,15 +3,13 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-const db = require('./utils/database')
+// const db = require('./utils/database')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const rootDir = require('./utils/path')
 const { notFound } = require('./controllers/404')
 
 const app = express()
-
-db.execute('SELECT * FROM products').then().catch()
 
 app.set('view engine', 'pug')
 app.set('views', 'views')
