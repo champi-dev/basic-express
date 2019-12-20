@@ -2,8 +2,8 @@ const http = require('http')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
-// const expressHbs = require('express-handlebars')
 
+const db = require('./utils/database')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const rootDir = require('./utils/path')
@@ -11,8 +11,8 @@ const { notFound } = require('./controllers/404')
 
 const app = express()
 
-// app.engine('hbs', expressHbs())
-// app.set('view engine', 'ejs')
+db.execute('SELECT * FROM products').then().catch()
+
 app.set('view engine', 'pug')
 app.set('views', 'views')
 
