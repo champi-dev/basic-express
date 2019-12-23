@@ -27,9 +27,16 @@ const getProducts = (req, res) => {
 
 const getProduct = (req, res) => {
   const { productId } = req.params
-  Product.findById(productId, product => {
-    res.render('shop/product-detail', { product, pageTitle: product.title, path: '/products' })
-  })
+  Product.findById(productId)
+    .then(([product]) => {
+      console.log('**product**', product)
+      res.render('shop/product-detail', {
+        product: product[0],
+        pageTitle: product.title,
+        path: '/products'
+      })
+    })
+    .catch(e => console.log(e))
 }
 
 const getCart = (req, res) => {
