@@ -55,7 +55,7 @@ const postEditProduct = (req, res) => {
 }
 
 const getProducts = (req, res) => {
-  Product.findAll()
+  req.user.getProducts()
     .then(products => {
       res.render('admin/products', {
         prods: products,
