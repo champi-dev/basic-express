@@ -16,7 +16,7 @@ const postAddProduct = (req, res) => {
     description,
     price
   })
-    .then(() => console.log(`${title} product was created`))
+    .then(() => res.redirect('/admin/products'))
     .catch(e => console.log(e))
 }
 
@@ -67,8 +67,11 @@ const getProducts = (req, res) => {
 
 const postDeleteProduct = (req, res) => {
   const { productId } = req.body
-  Product.deleteById(productId)
-  res.redirect('/admin/products')
+
+  Product.findByPk(productId)
+    .then(product => product.destroy())
+    .then(() => res.redirect('/admin/products'))
+    .catch(e => console.log(e))
 }
 
 module.exports = {
