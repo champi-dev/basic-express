@@ -3,6 +3,9 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 
+const Product = require('./models/product')
+const User = require('./models/user')
+
 const sequelize = require('./utils/database')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
@@ -23,7 +26,14 @@ app.use(notFound)
 const server = http.createServer(app)
 const PORT = 3000
 
-sequelize.sync()
+Product.belongsTo(User, {
+  constrains: true,
+  onDelete: 'CASCADE'
+})
+
+User.hasMany(Product)
+
+sequelize.sync({ force: true })
   .then(() => {
     server.listen(PORT, () => console.log(`listening on port: ${PORT}`))
   })
