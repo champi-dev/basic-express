@@ -9,7 +9,7 @@ block content
     h1 #{product.title}
     hr
     div 
-      img(src=product.imageUrl, alt=product.title)
+      img.image(src=product.imageUrl, alt=product.title)
     h2 #{product.price}
     p #{product.description}
     include ../includes/add-cart
