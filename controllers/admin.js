@@ -10,11 +10,13 @@ const getAddProduct = (req, res) => {
 
 const postAddProduct = (req, res) => {
   const { title, imageUrl, description, price } = req.body
-  const product = new Product(null, title, imageUrl, description, price)
-  product.save()
-    .then(() => {
-      res.redirect('/')
-    })
+  Product.create({
+    title,
+    imageUrl,
+    description,
+    price
+  })
+    .then(() => console.log(`${title} product was created`))
     .catch(e => console.log(e))
 }
 

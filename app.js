@@ -3,7 +3,7 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 
-// const db = require('./utils/database')
+const sequelize = require('./utils/database')
 const adminRoutes = require('./routes/admin')
 const shopRoutes = require('./routes/shop')
 const rootDir = require('./utils/path')
@@ -23,4 +23,8 @@ app.use(notFound)
 const server = http.createServer(app)
 const PORT = 3000
 
-server.listen(PORT, () => console.log(`listening on port: ${PORT}`))
+sequelize.sync()
+  .then(() => {
+    server.listen(PORT, () => console.log(`listening on port: ${PORT}`))
+  })
+  .catch(e => console.log(e))
