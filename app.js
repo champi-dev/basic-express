@@ -23,6 +23,15 @@ app.use(adminRoutes)
 app.use(shopRoutes)
 app.use(notFound)
 
+app.use((req, res, next) => {
+  User.findByPk(1)
+    .then(user => {
+      req.user = user
+      next()
+    })
+    .catch(e => console.log(e))
+})
+
 const server = http.createServer(app)
 const PORT = 3000
 
@@ -33,7 +42,19 @@ Product.belongsTo(User, {
 
 User.hasMany(Product)
 
-sequelize.sync({ force: true })
+sequelize
+  // .sync({ force: true })
+  .sync()
+  .then(() => User.findByPk(1))
+  .then(user => {
+    if (!user) {
+      return User.create({
+        name: 'Dan',
+        email: 'test@mail.com'
+      })
+    }
+    return user
+  })
   .then(() => {
     server.listen(PORT, () => console.log(`listening on port: ${PORT}`))
   })
