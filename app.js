@@ -18,10 +18,6 @@ app.set('view engine', 'pug')
 app.set('views', 'views')
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static(path.join(rootDir, 'public')))
-app.use(adminRoutes)
-app.use(shopRoutes)
-app.use(notFound)
 
 app.use((req, res, next) => {
   User.findByPk(1)
@@ -31,6 +27,11 @@ app.use((req, res, next) => {
     })
     .catch(e => console.log(e))
 })
+
+app.use(express.static(path.join(rootDir, 'public')))
+app.use(adminRoutes)
+app.use(shopRoutes)
+app.use(notFound)
 
 const server = http.createServer(app)
 const PORT = 3000

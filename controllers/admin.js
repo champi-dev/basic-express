@@ -10,7 +10,8 @@ const getAddProduct = (req, res) => {
 
 const postAddProduct = (req, res) => {
   const { title, imageUrl, description, price } = req.body
-  Product.create({
+
+  req.user.createProduct({
     title,
     imageUrl,
     description,
