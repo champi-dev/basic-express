@@ -25,29 +25,32 @@ const getEditProduct = (req, res) => {
   if (!editingMode) return res.redirect('/')
 
   const { productId } = req.params
-  Product.findById(productId, (product) => {
-    if (!product) return res.redirect('/')
-    res.render('admin/form-product', {
-      pageTitle: 'Edit Product',
-      path: '/admin/edit-product',
-      editing: editingMode,
-      product
+  Product.findByPk(productId)
+    .then(product => {
+      if (!product) return res.redirect('/')
+      res.render('admin/form-product', {
+        pageTitle: 'Edit Product',
+        path: '/admin/edit-product',
+        editing: editingMode,
+        product
+      })
     })
-  })
+    .catch(e => console.log(e))
 }
 
 const postEditProduct = (req, res) => {
   const { productId, title, imageUrl, price, description } = req.body
-  const product = new Product(
-    productId,
-    title,
-    imageUrl,
-    description,
-    price
-  )
 
-  product.save()
-  res.redirect('/admin/products')
+  Product.findByPk(productId)
+    .then(product => {
+      product.title = title
+      product.imageUrl = imageUrl
+      product.price = price
+      product.description = description
+      return product.save()
+    })
+    .then(() => res.redirect('/admin/products'))
+    .catch(e => console.log(e))
 }
 
 const getProducts = (req, res) => {
