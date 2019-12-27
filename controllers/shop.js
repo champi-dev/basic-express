@@ -39,24 +39,15 @@ const getProduct = (req, res) => {
 }
 
 const getCart = (req, res) => {
-  Cart.getCart(cart => {
-    Product.fetchAll(products => {
-      const cartProducts = []
-
-      products.forEach(product => {
-        const cartProductData = cart.products.find(prod => prod.id === product.id)
-        if (cartProductData) {
-          cartProducts.push({ productData: product, qty: cartProductData.qty })
-        }
-      })
-
-      res.render('shop/cart', {
+  req.user.getCart()
+    .then(cart => cart.getProducts()
+      .then(products => res.render('shop/cart', {
         pageTitle: 'Your Cart',
         path: '/cart',
-        products: cartProducts
-      })
-    })
-  })
+        products
+      }))
+      .catch(e => console.log(e)))
+    .catch(e => console.log(e))
 }
 
 const postCart = (req, res) => {
